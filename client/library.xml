@@ -1,0 +1,25 @@
+<xml xmlns="http://www.w3.org/1999/xhtml"><block type="factory_base" id="HIiJH|nj.^61k]D$EJjJ" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">robot_right</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <value name="TOOLTIP">
+      <block type="text" id="%qdY5{=|P~BCJv49+zp7" deletable="false" movable="false">
+        <field name="TEXT">Tip: Toltip</field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="*,}aCHruKW6M@_gjS~%h" deletable="false" movable="false">
+        <field name="TEXT">Help urk</field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="7RrZ7m6A7*@(sWt6v}V{"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="P5ZuL:IT=8G@,)]5d=`s">
+        <mutation colour="#a55b5b"></mutation>
+        <field name="HUE">0</field>
+      </block>
+    </value>
+  </block></xml>
