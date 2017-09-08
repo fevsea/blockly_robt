@@ -75,10 +75,9 @@ Blockly.Python['robot_rotate'] = function(block) {
 
 Blockly.Blocks['robot_buzz'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("buzz")
-        .appendField(new Blockly.FieldNumber(0, 0), "ms")
-        .appendField("ms");
+    this.appendValueInput("ms")
+        .setCheck("Number")
+        .appendField("buzz (ms)");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -88,9 +87,8 @@ Blockly.Blocks['robot_buzz'] = {
 };
 
 Blockly.Python['robot_buzz'] = function(block) {
-  var number_ms = block.getFieldValue('ms');
-  // TODO: Assemble JavaScript into code variable.
-  var code = 'robot.buzz(' + number_ms + ')';
+  var number_ms = Blockly.Python.valueToCode(block, 'ms', Blockly.Python.ORDER_ATOMIC);
+  var code = 'robot.buzzer(' + number_ms + ')\n';
   // TODO: Change ORDER_NONE to the correct strength.
   return code;
 };

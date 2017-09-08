@@ -7,11 +7,11 @@ except:
     GpioEnabled = False
 
 # Pin constants
-motorAC  = 8        # Left motor clockwise
-motorACC = 10       # Left motor contraclockwise
+motorAC  = 40        # Left motor clockwise
+motorACC = 38       # Left motor contraclockwise
 motorBC  = 16       # Right motor clockwise
 motorBCC = 18       # Right motor contraclockwise
-buzz = 12       # Right motor contraclockwise
+buzz     = 12       # Right motor contraclockwise
 
 def init():
     print("Robot: Init done")
