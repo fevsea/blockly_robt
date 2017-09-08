@@ -1,3 +1,5 @@
+
+import time
 GpioEnabled = True
 try:
     import RPi.GPIO as GPIO
@@ -9,12 +11,13 @@ motorAC  = 8        # Left motor clockwise
 motorACC = 10       # Left motor contraclockwise
 motorBC  = 16       # Right motor clockwise
 motorBCC = 18       # Right motor contraclockwise
+buzz = 12       # Right motor contraclockwise
 
 def init():
     print("Robot: Init done")
     if GpioEnabled:
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup([motorAC, motorACC, motorBC, motorBCC], GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup([motorAC, motorACC, motorBC, motorBCC, buzz], GPIO.OUT, initial=GPIO.LOW)
 
 def cleanUp():
     print("Robot: Cleanup done")
@@ -58,6 +61,13 @@ def rotateLeft():
     print("Robot: rotate left")
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.HIGH, GPIO.HIGH, GPIO.LOW)
+
+def buzzer(ms):
+    print("Robot: buzz")
+    if GpioEnabled:
+        GPIO.output(buzz, GPIO.HIGH)
+        time.sleep (ms / 1000.0);
+        GPIO.output(buzz, GPIO.LOW)
 
 def stop():
     print("Robot: stop")
