@@ -468,18 +468,11 @@ Code.initLanguage = function() {
   document.getElementById('trashButton').title = MSG['trashTooltip'];
 };
 
-function sendDataOld(data){
-  console.log("sendData:" + data);
-  var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "http://127.0.0.1:8081", false ); // false for synchronous request
-    xmlHttp.send( data );
-    return xmlHttp.responseText;
-}
 
 function sendData(data){
   console.log("sendData: " + data);
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://127.0.0.1:8081/?code=" + encodeURI(data), false);
+  xhr.open("GET", "http://" + window.location.host + ":8081/?code=" + encodeURI(data), false);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
   xhr.send();
   console.log("receivedData: "+ xhr.responseText);

@@ -73,7 +73,27 @@ Blockly.Python['robot_rotate'] = function(block) {
   return code;
 };
 
+Blockly.Blocks['robot_buzz'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("buzz")
+        .appendField(new Blockly.FieldNumber(0, 0), "ms")
+        .appendField("ms");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
+Blockly.Python['robot_buzz'] = function(block) {
+  var number_ms = block.getFieldValue('ms');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'robot.buzz(' + number_ms + ')';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return code;
+};
 
 
 
