@@ -2,6 +2,9 @@
 import robot, time
 # Initializations
 robot.init()
-print("IT works")
+while False:
+  robot.fordwards()
+  time.sleep(1)
+
 # Cleanups
 robot.cleanUp()

@@ -30,7 +30,9 @@ class ExecutionManager():
         python_file.write(code)
         python_file.close()
         self.proc = subprocess.Popen(["python3", self.path + self.filename], shell=False)
-        print("Executing: " + str(self.proc.pid))
+        pid = str(self.proc.pid)
+        print("Executing: " + pid)
+        return pid
 
 
     def run(code):
