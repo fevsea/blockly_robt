@@ -134,6 +134,14 @@ pre.content {
   font-family: monospace;
   overflow: scroll;
 }
+#content_console {
+  resize: none;
+  outline: none;
+  font-size: larger;
+  border: 1px solid #ccc;
+  font-family: monospace;
+  overflow: scroll;
+}
 #languageMenu {
   vertical-align: top;
   margin-top: 15px;
