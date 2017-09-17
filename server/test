@@ -1,0 +1,29 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables></variables>
+  <block type="controls_if" id="2.Nw_i~lq#u%5{^-Y{jI" x="88" y="63">
+    <value name="IF0">
+      <block type="logic_boolean" id="37pF**O~0RpouH^06NMM">
+        <field name="BOOL">TRUE</field>
+      </block>
+    </value>
+    <statement name="DO0">
+      <block type="utils_wait" id="):72mhH{]7*Cxz2X+;6X">
+        <field name="time">3</field>
+        <next>
+          <block type="robot_move" id="K{A%QCU^Yk*Y1N#.h3GC">
+            <field name="move">fordwards</field>
+            <next>
+              <block type="utils_run_code" id="#ZH)~JQ9LTLxv@0udrXG">
+                <value name="command">
+                  <block type="text" id="^,/@d[^zrsU!9b8HIES.">
+                    <field name="TEXT">robot.mPrint("OKOKOK")</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

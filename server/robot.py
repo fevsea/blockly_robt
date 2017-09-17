@@ -1,4 +1,4 @@
-
+import json
 import time
 GpioEnabled = True
 try:
@@ -13,14 +13,22 @@ motorBC  = 16       # Right motor clockwise
 motorBCC = 18       # Right motor contraclockwise
 buzz     = 12       # Right motor contraclockwise
 
+
+def mPrint(data):
+    print(data)
+    js = json.dumps({'op': 'PROGRAM_PRINT', 'data': data})
+    python_file = open("out", 'w+')
+    python_file.write(js)
+    python_file.close()
+
 def init():
-    print("Robot: Init done")
+    mPrint("Robot: Init done")
     if GpioEnabled:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup([motorAC, motorACC, motorBC, motorBCC, buzz], GPIO.OUT, initial=GPIO.LOW)
 
 def cleanUp():
-    print("Robot: Cleanup done")
+    mPrint("Robot: Cleanup done")
     if GpioEnabled:
         GPIO.cleanup()
 
@@ -33,43 +41,43 @@ def setMotors(ac, acc, bc, bcc):
         GPIO.output(motorBCC, bcc)
 
 def fordwards():
-    print("Robot: fordwards")
+    mPrint("Robot: fordwards")
     if GpioEnabled:
         setMotors(GPIO.HIGH, GPIO.LOW, GPIO.HIGH, GPIO.LOW)
 
 def backwards():
-    print("Robot: backwards")
+    mPrint("Robot: backwards")
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.HIGH, GPIO.LOW, GPIO.HIGH)
 
 def right():
-    print("Robot: right")
+    mPrint("Robot: right")
     if GpioEnabled:
         setMotors(GPIO.HIGH, GPIO.LOW, GPIO.LOW, GPIO.LOW)
 
 def left():
-    print("Robot: left")
+    mPrint("Robot: left")
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.LOW, GPIO.HIGH, GPIO.LOW)
 
 def rotateRight():
-    print("Robot: rotate right")
+    mPrint("Robot: rotate right")
     if GpioEnabled:
         setMotors(GPIO.HIGH, GPIO.LOW, GPIO.LOW, GPIO.HIGH)
 
 def rotateLeft():
-    print("Robot: rotate left")
+    mPrint("Robot: rotate left")
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.HIGH, GPIO.HIGH, GPIO.LOW)
 
 def buzzer(ms):
-    print("Robot: buzz")
+    mPrint("Robot: buzz")
     if GpioEnabled:
         GPIO.output(buzz, GPIO.HIGH)
         time.sleep (ms / 1000.0);
         GPIO.output(buzz, GPIO.LOW)
 
 def stop():
-    print("Robot: stop")
+    mPrint("Robot: stop")
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.LOW, GPIO.LOW, GPIO.LOW)
