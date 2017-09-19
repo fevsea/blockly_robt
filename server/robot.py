@@ -1,5 +1,6 @@
 import json
 import time
+import os
 GpioEnabled = True
 try:
     import RPi.GPIO as GPIO
@@ -13,11 +14,17 @@ motorBC  = 16       # Right motor clockwise
 motorBCC = 18       # Right motor contraclockwise
 buzz     = 12       # Right motor contraclockwise
 
+index    = 0
 
 def mPrint(data):
     print(data)
     js = json.dumps({'op': 'PROGRAM_PRINT', 'data': data})
-    python_file = open("out", 'w+')
+    files = os.listdir("out/")
+    files.sort()
+    filename = files[-1] if files else "0"
+    global index
+    index += 1
+    python_file = open("out/filename" + str(index), 'w+')
     python_file.write(js)
     python_file.close()
 
@@ -74,7 +81,7 @@ def buzzer(ms):
     mPrint("Robot: buzz")
     if GpioEnabled:
         GPIO.output(buzz, GPIO.HIGH)
-        time.sleep (ms / 1000.0);
+        time.sleep (ms / 1000.0)
         GPIO.output(buzz, GPIO.LOW)
 
 def stop():

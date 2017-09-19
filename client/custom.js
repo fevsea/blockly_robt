@@ -2,6 +2,10 @@ var ws = null;
 ws = new WebSocket("ws://127.0.0.1:5678/");
 consoleData = ""
 
+function updateConsoleData(){
+
+}
+
 
 function sendToServer(data) {
     console.log("Send: " + op);
@@ -25,6 +29,7 @@ ws.onerror = function (event) {
 ws.onmessage = function (event) {
     console.log("Received: " + event.data);
     consoleData += "Received: " + event.data + "\n";
+    updateConsoleData()
     response = JSON.parse(event.data);
 
     switch(response["op"]) {
@@ -78,4 +83,5 @@ function sendRun(){
       op: "RUN_CODE",
       data: Blockly.Python.workspaceToCode(Code.workspace)});
     sendToServer(op);
+    Code.tabClick("console");
 }

@@ -18,19 +18,31 @@ async def handler(websocket, path):
     for task in pending:
         task.cancel()
 
+
+def updateQ():
+    files = os.listdir("out/")
+    files.sort()
+    q = []
+    for file in files:
+        f = open("out/" + file, "r")
+        d = f.read()
+        q.append(d)
+        f.close()
+        os.remove("out/" + file)
+    return q
+
+
 async def producer_handler(websocket):
     q = []
     while True:
         while q:
-            await websocket.send(q.pop(0))
+            response = q.pop(0)
+            await websocket.send(response)
+            print("> {}".format(response))
         try:
-            f = open("out", "r")
-            q = f.readlines()
-            f.close()
-            os.remove("out")
+            q = updateQ()
         except:
             pass
-        q = [x.strip() for x in q]
         await asyncio.sleep(random.random())
 
 
