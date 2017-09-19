@@ -12,7 +12,9 @@ motorAC  = 40        # Left motor clockwise
 motorACC = 38       # Left motor contraclockwise
 motorBC  = 16       # Right motor clockwise
 motorBCC = 18       # Right motor contraclockwise
-buzz     = 12       # Right motor contraclockwise
+#buzz    = 12       # Right motor contraclockwise
+trig     = 11
+echo     = 13
 
 index    = 0
 
@@ -32,11 +34,13 @@ def init():
     mPrint("Robot: Init done")
     if GpioEnabled:
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup([motorAC, motorACC, motorBC, motorBCC, buzz], GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup([motorAC, motorACC, motorBC, motorBCC, trig], GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup([echo], GPIO.IN)
 
 def cleanUp():
     mPrint("Robot: Cleanup done")
     if GpioEnabled:
+        GPIO.output(trig, False)
         GPIO.cleanup()
 
 
@@ -77,14 +81,41 @@ def rotateLeft():
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.HIGH, GPIO.HIGH, GPIO.LOW)
 
-def buzzer(ms):
-    mPrint("Robot: buzz")
-    if GpioEnabled:
-        GPIO.output(buzz, GPIO.HIGH)
-        time.sleep (ms / 1000.0)
-        GPIO.output(buzz, GPIO.LOW)
+
+# def buzzer(ms):
+#     mPrint("Robot: buzz")
+#     if GpioEnabled:
+#         GPIO.output(buzz, GPIO.HIGH)
+#         time.sleep (ms / 1000.0)
+#         GPIO.output(buzz, GPIO.LOW)
+
 
 def stop():
     mPrint("Robot: stop")
     if GpioEnabled:
         setMotors(GPIO.LOW, GPIO.LOW, GPIO.LOW, GPIO.LOW)
+
+
+def readDistance():
+    start = 0
+    end = 0
+    # Configura el sensor
+    GPIO.output(trig, False)
+    time.sleep(0.1)  # 10 microsegundos
+    # Empezamos a medir
+    GPIO.output(trig, True)
+    time.sleep(10*10**-6) #10 microsegundos
+    GPIO.output(trig, False)
+
+    # Flanco de 0 a 1 = inicio
+    while GPIO.input(echo) == GPIO.LOW:
+        start = time.time()
+    # Flanco de 1 a 0 = fin
+    while GPIO.input(echo) == GPIO.HIGH:
+        end = time.time()
+
+    # el tiempo que devuelve time() est ^c   en segundos
+    distancia = (end - start) * 343 / 2
+    print ("Distancia al objeto =", str(distancia))
+    return distancia
+

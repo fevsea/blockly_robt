@@ -59,7 +59,6 @@ function saveCode(xml_code){
 
 
 
-
 function mirrorEvent(primaryEvent) {
     if (primaryEvent.type == Blockly.Events.UI) {
         return;  // Don't mirror UI events.
