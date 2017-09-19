@@ -141,7 +141,7 @@ Blockly.Python['utils_run_code'] = function(block) {
 };
 
 
-Blockly.Blocks['read_distance'] = {
+Blockly.Blocks['robot_read_distance'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("front distance");
@@ -152,9 +152,31 @@ Blockly.Blocks['read_distance'] = {
   }
 };
 
-Blockly.Python['read_distance'] = function(block) {
+Blockly.Python['robot_read_distance'] = function(block) {
   // TODO: Assemble Python into code variable.
   var code = 'robot.readDistance()';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Blocks['utils_print'] = {
+  init: function() {
+    this.appendValueInput("command")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("print ");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(40);
+ this.setTooltip("Tip: Toltip");
+ this.setHelpUrl("Help urk");
+  }
+};
+
+Blockly.Python['utils_print'] = function(block) {
+  var value_command = Blockly.Python.valueToCode(block, 'command', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = "robot.mPrint(" + value_command + ')\n';
+  return code;
 };

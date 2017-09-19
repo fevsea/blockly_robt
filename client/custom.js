@@ -1,9 +1,11 @@
 var ws = null;
-ws = new WebSocket("ws://127.0.0.1:5678/");
+ws = new WebSocket("ws://" + window.location.host + ":5678/");
 consoleData = ""
 
 function updateConsoleData(){
-
+    if (document.getElementById('tab_console').className == 'tabon') {
+        Code.tabClick("console");
+    }
 }
 
 
